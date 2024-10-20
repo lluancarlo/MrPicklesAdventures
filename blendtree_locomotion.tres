@@ -1,0 +1,44 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=8 format=3 uid="uid://dm7yyj44iueid"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w3m3m"]
+animation = &"animlib_locomotion/jump_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpoy1"]
+animation = &"animlib_locomotion/male_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ob7f7"]
+animation = &"animlib_locomotion/male_walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xrkaj"]
+animation = &"animlib_locomotion/male_run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_d368h"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_wpoy1")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_ob7f7")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_xrkaj")
+blend_point_2/pos = 2.0
+min_space = 0.0
+max_space = 2.0
+value_label = "speed"
+sync = true
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_jrx0b"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gcl6w"]
+filter_enabled = true
+filters = ["%GeneralSkeleton:LeftHand", "%GeneralSkeleton:LeftIndexDistal", "%GeneralSkeleton:LeftIndexIntermediate", "%GeneralSkeleton:LeftIndexProximal", "%GeneralSkeleton:LeftLowerArm", "%GeneralSkeleton:LeftMiddleDistal", "%GeneralSkeleton:LeftMiddleIntermediate", "%GeneralSkeleton:LeftMiddleProximal", "%GeneralSkeleton:LeftShoulder", "%GeneralSkeleton:LeftThumbDistal", "%GeneralSkeleton:LeftThumbMetacarpal", "%GeneralSkeleton:LeftThumbProximal", "%GeneralSkeleton:LeftUpperArm", "%GeneralSkeleton:RightHand", "%GeneralSkeleton:RightIndexDistal", "%GeneralSkeleton:RightIndexIntermediate", "%GeneralSkeleton:RightIndexProximal", "%GeneralSkeleton:RightLowerArm", "%GeneralSkeleton:RightMiddleDistal", "%GeneralSkeleton:RightMiddleIntermediate", "%GeneralSkeleton:RightMiddleProximal", "%GeneralSkeleton:RightShoulder", "%GeneralSkeleton:RightThumbDistal", "%GeneralSkeleton:RightThumbMetacarpal", "%GeneralSkeleton:RightThumbProximal", "%GeneralSkeleton:RightUpperArm", "%GeneralSkeleton:mixamorig_LeftHandIndex1", "%GeneralSkeleton:mixamorig_LeftHandMiddle1", "%GeneralSkeleton:mixamorig_LeftHandThumb1", "%GeneralSkeleton:mixamorig_RightHandIndex1", "%GeneralSkeleton:mixamorig_RightHandMiddle1", "%GeneralSkeleton:mixamorig_RightHandThumb1"]
+
+[resource]
+graph_offset = Vector2(-807.179, -81.5708)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_w3m3m")
+nodes/Animation/position = Vector2(-320, 140)
+nodes/Locomotion/node = SubResource("AnimationNodeBlendSpace1D_d368h")
+nodes/Locomotion/position = Vector2(-200, 0)
+nodes/OnAir/node = SubResource("AnimationNodeBlend2_jrx0b")
+nodes/OnAir/position = Vector2(0, 20)
+nodes/blend_loc_combat/node = SubResource("AnimationNodeBlend2_gcl6w")
+nodes/blend_loc_combat/position = Vector2(400, 0)
+nodes/output/position = Vector2(600, 0)
+node_connections = [&"OnAir", 0, &"Locomotion", &"OnAir", 1, &"Animation", &"blend_loc_combat", 0, &"OnAir", &"output", 0, &"blend_loc_combat"]

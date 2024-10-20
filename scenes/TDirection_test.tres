@@ -1,0 +1,104 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=14 format=3 uid="uid://dg1u8xbcua26i"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ikmb6"]
+animation = &"animlib_locomotion/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6sne1"]
+animation = &"animlib_locomotion/walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5odt8"]
+animation = &"animlib_locomotion/walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oaejf"]
+animation = &"animlib_locomotion/walk_back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_53ifa"]
+animation = &"animlib_locomotion/run_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o2621"]
+animation = &"animlib_locomotion/run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ogj6m"]
+animation = &"animlib_locomotion/run_back"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_imf1h"]
+animation = &"animlib_locomotion/run_front"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0x0ih"]
+animation = &"animlib_locomotion/walk_front"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_30btm"]
+xfade_time = 0.2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "walk"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "run"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_3qetm"]
+xfade_time = 0.25
+input_0/name = "front"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "right"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "left"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "back"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_hijch"]
+input_0/name = "normal"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5i0xi"]
+animation = &"animlib_locomotion/walk_front"
+
+[resource]
+graph_offset = Vector2(-291.442, 67.4633)
+"nodes/Animation 10/node" = SubResource("AnimationNodeAnimation_ikmb6")
+"nodes/Animation 10/position" = Vector2(-120, 40)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_6sne1")
+"nodes/Animation 2/position" = Vector2(-160, 400)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_5odt8")
+"nodes/Animation 3/position" = Vector2(-160, 540)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_oaejf")
+"nodes/Animation 4/position" = Vector2(-160, 680)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_53ifa")
+"nodes/Animation 5/position" = Vector2(-160, 1040)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_o2621")
+"nodes/Animation 6/position" = Vector2(-160, 1180)
+"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_ogj6m")
+"nodes/Animation 7/position" = Vector2(-160, 1320)
+"nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_imf1h")
+"nodes/Animation 8/position" = Vector2(-260, 1900)
+"nodes/Animation 9/node" = SubResource("AnimationNodeAnimation_0x0ih")
+"nodes/Animation 9/position" = Vector2(-160, 900)
+nodes/Direction/node = SubResource("AnimationNodeTransition_30btm")
+nodes/Direction/position = Vector2(720, 380)
+nodes/DirectionR/node = SubResource("AnimationNodeTransition_3qetm")
+nodes/DirectionR/position = Vector2(200, 1020)
+nodes/DirectionW/node = null
+nodes/DirectionW/position = Vector2(200, 400)
+nodes/Mood/node = SubResource("AnimationNodeTransition_hijch")
+nodes/Mood/position = Vector2(200, 20)
+nodes/output/position = Vector2(980, 400)
+nodes/walk_front/node = SubResource("AnimationNodeAnimation_5i0xi")
+nodes/walk_front/position = Vector2(-160, 260)
+node_connections = [&"Direction", 0, &"Mood", &"Direction", 1, &"DirectionW", &"Direction", 2, &"DirectionR", &"DirectionR", 0, &"Animation 9", &"DirectionR", 1, &"Animation 5", &"DirectionR", 2, &"Animation 6", &"DirectionR", 3, &"Animation 7", &"DirectionW", 0, &"walk_front", &"DirectionW", 1, &"Animation 2", &"DirectionW", 2, &"Animation 3", &"DirectionW", 3, &"Animation 4", &"Mood", 0, &"Animation 10", &"output", 0, &"Direction"]
