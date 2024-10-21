@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cv24el1mhswww"
-path="res://.godot/imported/hollow-cylinder.glb-018f31be899036e907664231681a2c02.scn"
+uid="uid://w4i6rkespaf7"
+path="res://.godot/imported/pickles.glb-4d0b68b5fac4d00bbd22eda4eef99554.scn"
 
 [deps]
 
-source_file="res://assets/objects/hollow-cylinder.glb"
-dest_files=["res://.godot/imported/hollow-cylinder.glb-018f31be899036e907664231681a2c02.scn"]
+source_file="res://assets/character/meshes/pickles.glb"
+dest_files=["res://.godot/imported/pickles.glb-4d0b68b5fac4d00bbd22eda4eef99554.scn"]
 
 [params]
 
@@ -17,6 +17,7 @@ nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
@@ -28,18 +29,13 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
-"meshes": {
-"hollow-cylinder_Cylinder_003": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 2,
-"lods/normal_merge_angle": 60.0,
-"lods/normal_split_angle": 25.0,
-"save_to_file/enabled": false,
-"save_to_file/make_streamable": "",
-"save_to_file/path": ""
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"rest_pose/external_animation_library": null,
+"retarget/bone_map": Resource("res://default_bone_map.tres")
 }
 }
 }
