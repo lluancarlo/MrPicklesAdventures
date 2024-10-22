@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://wtm31xcy6wi2"]
+[gd_scene load_steps=41 format=3 uid="uid://wtm31xcy6wi2"]
 
 [ext_resource type="Texture2D" uid="uid://beud3ach2qpqh" path="res://assets/textures/KenneyPrototypeTextures/Dark/texture_13.png" id="1_w1mpl"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_2ikht"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cb8mq3ryp26wq" path="res://assets/textures/KenneyPrototypeTextures/Red/texture_01.png" id="3_ee2uc"]
 [ext_resource type="PackedScene" uid="uid://cg1lv56qte00m" path="res://scenes/modules/animation_control.tscn" id="4_dip5g"]
 [ext_resource type="Script" path="res://scripts/modules/camera_control.gd" id="5_wr5tv"]
-[ext_resource type="PackedScene" uid="uid://iendvnbaddqd" path="res://scenes/characters/pickles.scn" id="7_wta11"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="8_0pax7"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="9_i0ec2"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="10_tvkhf"]
@@ -247,7 +246,7 @@ script = ExtResource("2_2ikht")
 
 [node name="MovementControl" parent="Player/Modules" node_paths=PackedStringArray("_character", "_armature") instance=ExtResource("3_577po")]
 _character = NodePath("../../Character")
-_armature = NodePath("../../Character/PicklesMesh")
+_armature = NodePath("")
 
 [node name="CameraControl" type="Node" parent="Player/Modules" node_paths=PackedStringArray("_player_cam", "_aim_cam")]
 script = ExtResource("5_wr5tv")
@@ -282,8 +281,6 @@ parameters/Locomotion/Mood/current_index = 0
 
 [node name="JumpRayCast" type="RayCast3D" parent="Player/Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
-
-[node name="PicklesMesh" parent="Player/Character" instance=ExtResource("7_wta11")]
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="Player" node_paths=PackedStringArray("follow_target")]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.85505, 2.34923)

@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://w4i6rkespaf7"
+uid="uid://bjjdm73trgosy"
 path="res://.godot/imported/pickles.glb-4d0b68b5fac4d00bbd22eda4eef99554.scn"
 
 [deps]
@@ -35,7 +35,7 @@ _subresources={
 "nodes": {
 "PATH:Armature/Skeleton3D": {
 "rest_pose/external_animation_library": null,
-"retarget/bone_map": Resource("res://default_bone_map.tres")
+"retarget/bone_map": Resource("res://assets/character/default_bone_map.tres")
 }
 }
 }
