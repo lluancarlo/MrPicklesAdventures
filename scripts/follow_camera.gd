@@ -56,7 +56,7 @@ func _physics_process(_delta):
 	pos = target + from_target
 	
 	if is_aiming:
-		print(global_position.distance_to(target))
+		#global_position.distance_to(target))
 		global_position = lerp(global_position, target + aim_offset, 0.1)
 		global_rotation = lerp(global_rotation, get_parent().global_rotation, 0.1)
 	else:

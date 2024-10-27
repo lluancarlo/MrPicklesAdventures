@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg1lv56qte00m"]
-
-[ext_resource type="Script" path="res://scripts/modules/animation_control.gd" id="1_qma85"]
-
-[node name="AnimationControl" type="Node"]
-script = ExtResource("1_qma85")

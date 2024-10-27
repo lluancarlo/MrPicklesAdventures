@@ -1,5 +1,5 @@
 extends Node
-class_name CameraControl
+class_name CFollowCamera
 
 
 @export_category(&"Nodes")
@@ -13,7 +13,7 @@ class_name CameraControl
 @export var max_yaw: float = 360
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#TODO: check this code out, it might be a better way to handle this
 	if Input.is_action_just_pressed("menu"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
@@ -53,4 +53,4 @@ func _set_pcam_rotation(pcam: PhantomCamera3D, event: InputEvent) -> void:
 
 		# Change the SpringArm3D node's rotation and rotate around its target
 		pcam.set_third_person_rotation_degrees(pcam_rotation_degrees)
-		print(pcam_rotation_degrees)
+		#print(pcam_rotation_degrees)

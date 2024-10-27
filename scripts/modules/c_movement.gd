@@ -1,5 +1,5 @@
 extends Node
-class_name MovementControl
+class_name CMovement
 
 
 @export_category(&"Nodes")

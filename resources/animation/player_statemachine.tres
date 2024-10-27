@@ -12,8 +12,8 @@ animation = &"animlib-idle/idle-random-3"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_j7nrc"]
 filter_enabled = true
 filters = ["%GeneralSkeleton:Chest", "%GeneralSkeleton:Head", "%GeneralSkeleton:LeftHand", "%GeneralSkeleton:LeftIndexDistal", "%GeneralSkeleton:LeftIndexIntermediate", "%GeneralSkeleton:LeftIndexProximal", "%GeneralSkeleton:LeftLowerArm", "%GeneralSkeleton:LeftMiddleDistal", "%GeneralSkeleton:LeftMiddleIntermediate", "%GeneralSkeleton:LeftMiddleProximal", "%GeneralSkeleton:LeftShoulder", "%GeneralSkeleton:LeftThumbDistal", "%GeneralSkeleton:LeftThumbMetacarpal", "%GeneralSkeleton:LeftThumbProximal", "%GeneralSkeleton:LeftUpperArm", "%GeneralSkeleton:Neck", "%GeneralSkeleton:RightHand", "%GeneralSkeleton:RightIndexDistal", "%GeneralSkeleton:RightIndexIntermediate", "%GeneralSkeleton:RightIndexProximal", "%GeneralSkeleton:RightLowerArm", "%GeneralSkeleton:RightMiddleDistal", "%GeneralSkeleton:RightMiddleIntermediate", "%GeneralSkeleton:RightMiddleProximal", "%GeneralSkeleton:RightShoulder", "%GeneralSkeleton:RightThumbDistal", "%GeneralSkeleton:RightThumbMetacarpal", "%GeneralSkeleton:RightThumbProximal", "%GeneralSkeleton:RightUpperArm", "%GeneralSkeleton:Spine", "%GeneralSkeleton:UpperChest"]
-fadein_time = 0.5
-fadeout_time = 0.5
+fadein_time = 0.3
+fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eig2f"]
 animation = &"animlib-idle/standard-idle"
@@ -33,7 +33,7 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4h2da"]
-graph_offset = Vector2(-704.514, -3.31523)
+graph_offset = Vector2(-706.387, -51.1926)
 nodes/IdleRandom1/node = SubResource("AnimationNodeAnimation_s1y5m")
 nodes/IdleRandom1/position = Vector2(-500, 180)
 nodes/IdleRandom2/node = SubResource("AnimationNodeAnimation_xwb41")
@@ -44,15 +44,17 @@ nodes/RandomTaunt/node = SubResource("AnimationNodeOneShot_j7nrc")
 nodes/RandomTaunt/position = Vector2(60, 40)
 nodes/StandardIdle/node = SubResource("AnimationNodeAnimation_eig2f")
 nodes/StandardIdle/position = Vector2(-320, 0)
-nodes/Transition/node = SubResource("AnimationNodeTransition_40a7u")
-nodes/Transition/position = Vector2(-160, 260)
+nodes/Taunt/node = SubResource("AnimationNodeTransition_40a7u")
+nodes/Taunt/position = Vector2(-160, 260)
 nodes/output/position = Vector2(620, 100)
-node_connections = [&"RandomTaunt", 0, &"StandardIdle", &"RandomTaunt", 1, &"Transition", &"Transition", 0, &"IdleRandom1", &"Transition", 1, &"IdleRandom2", &"Transition", 2, &"IdleRandom3", &"output", 0, &"RandomTaunt"]
+node_connections = [&"RandomTaunt", 0, &"StandardIdle", &"RandomTaunt", 1, &"Taunt", &"Taunt", 0, &"IdleRandom1", &"Taunt", 1, &"IdleRandom2", &"Taunt", 2, &"IdleRandom3", &"output", 0, &"RandomTaunt"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5jfju"]
 advance_mode = 2
+advance_condition = &"on_idle"
 
 [resource]
 states/Idle/node = SubResource("AnimationNodeBlendTree_4h2da")
 states/Idle/position = Vector2(379, 67)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_5jfju")]
+graph_offset = Vector2(-143, -57)
