@@ -67,11 +67,12 @@ wait_time = 10.0
 
 [node name="Modules" type="Node" parent="."]
 
-[node name="CMovement" parent="Modules" node_paths=PackedStringArray("_character") instance=ExtResource("1_du72k")]
-_character = NodePath("../../Character")
-
 [node name="CAnimation" parent="Modules" node_paths=PackedStringArray("_anim_tree") instance=ExtResource("3_mccyj")]
 _anim_tree = NodePath("../../Character/AnimationTree")
+
+[node name="CMovement" parent="Modules" node_paths=PackedStringArray("_character", "_armature") instance=ExtResource("1_du72k")]
+_character = NodePath("../../Character")
+_armature = NodePath("../../Character/Pickles/Armature")
 
 [node name="CameraControl" type="Node" parent="Modules" node_paths=PackedStringArray("_player_cam", "_aim_cam")]
 script = ExtResource("5_vw3qu")
@@ -79,6 +80,8 @@ _player_cam = NodePath("../../PlayerPhantomCamera3D")
 _aim_cam = NodePath("../../PlayerAimPhantomCamera3D")
 
 [node name="Character" type="CharacterBody3D" parent="."]
+floor_max_angle = 0.698132
+platform_on_leave = 2
 
 [node name="PlayerCameraPivot" type="Node3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -86,9 +89,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_ws44m")
-
-[node name="JumpRayCast" type="RayCast3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="Character"]
 root_node = NodePath("../Pickles")

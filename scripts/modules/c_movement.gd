@@ -2,6 +2,8 @@ extends Node
 class_name CMovement
 
 
+enum StateMovement {WALK, RUN}
+
 @export_category(&"Nodes")
 @export var _character : CharacterBody3D
 @export var _armature : Node3D
@@ -13,7 +15,7 @@ class_name CMovement
 
 var _camera : Camera3D
 var gravity = ProjectSettings.get_setting(&"physics/3d/default_gravity")
-var is_running : bool
+var movement_state := StateMovement.WALK
 
 
 func _ready() -> void:
@@ -21,7 +23,13 @@ func _ready() -> void:
 	assert(_camera != null, "There is no main camera setted!")
 
 
+func _process(_delta: float) -> void:
+	# move_and_slide here fix the jitter problem
+	_character.move_and_slide()
+
+
 func _physics_process(delta: float) -> void:
+	
 	# Add the gravity.
 	if not _character.is_on_floor():
 		_character.velocity.y -= gravity * delta
@@ -30,26 +38,28 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed(&"jump") and _character.is_on_floor():
 		_character.velocity.y = _jump_speed
 	
-	is_running = Input.is_action_pressed(&"running")
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector(&"left", &"right", &"forward", &"back")
-	var direction = Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, _camera.rotation.y)
+	var direction = Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, _camera.rotation.y).normalized()
 	
+	var speed = _get_speed()
 	if direction:
-		_character.velocity.x = direction.x * _get_speed()
-		_character.velocity.z = direction.z * _get_speed()
+		_character.velocity.x = direction.x * speed
+		_character.velocity.z = direction.z * speed
 	else:
-		_character.velocity.x = move_toward(_character.velocity.x, 0, _get_speed())
-		_character.velocity.z = move_toward(_character.velocity.z, 0, _get_speed())
+		_character.velocity.x = move_toward(_character.velocity.x, 0, speed)
+		_character.velocity.z = move_toward(_character.velocity.z, 0, speed)
 	
-	var new_rotation = atan2(_character.velocity.x, _character.velocity.z)
-	if new_rotation != 0:
-		_armature.rotation.y = lerp_angle(_armature.rotation.y, new_rotation, _rotation_transition)
-
-	_character.move_and_slide()
+	if input_dir != Vector2.ZERO:
+		_armature.look_at(_character.position - direction)
 
 
 func _get_speed() -> float:
-	return _run_speed if is_running else _walk_speed
+	match movement_state:
+		StateMovement.WALK:
+			return _run_speed
+		StateMovement.WALK:
+			return _walk_speed
+		_:
+			return 0
