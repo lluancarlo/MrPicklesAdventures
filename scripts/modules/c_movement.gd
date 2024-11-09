@@ -7,11 +7,13 @@ enum StateMovement {WALK, RUN}
 @export_category(&"Nodes")
 @export var _character : CharacterBody3D
 @export var _armature : Node3D
-@export_category(&"Variables")
-@export var _walk_speed = 2.0
-@export var _run_speed = 4.0
+@export_category(&"Debug Nodes")
+@export var _debug_direction : RayCast3D
+@export_category(&"Speeds")
+@export var _walk_speed = 20.0
+@export var _run_speed = 40.0
 @export var _jump_speed = 4.5
-@export var _rotation_transition = 0.15
+@export var _rotation_speed = 8.0
 
 var _camera : Camera3D
 var gravity = ProjectSettings.get_setting(&"physics/3d/default_gravity")
@@ -43,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector(&"left", &"right", &"forward", &"back")
 	var direction = Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, _camera.rotation.y).normalized()
 	
-	var speed = _get_speed()
+	var speed = _get_speed() * delta * 3
 	if direction:
 		_character.velocity.x = direction.x * speed
 		_character.velocity.z = direction.z * speed
@@ -51,8 +53,11 @@ func _physics_process(delta: float) -> void:
 		_character.velocity.x = move_toward(_character.velocity.x, 0, speed)
 		_character.velocity.z = move_toward(_character.velocity.z, 0, speed)
 	
+		
 	if input_dir != Vector2.ZERO:
-		_armature.look_at(_character.position - direction)
+		if is_instance_valid(_debug_direction):
+			_debug_direction.target_position = direction
+		_armature.rotation.y = lerp_angle(_armature.rotation.y, atan2(-direction.x, -direction.z), _rotation_speed * delta)
 
 
 func _get_speed() -> float:
