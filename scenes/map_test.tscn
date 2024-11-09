@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://wtm31xcy6wi2"]
+[gd_scene load_steps=23 format=3 uid="uid://wtm31xcy6wi2"]
 
 [ext_resource type="Texture2D" uid="uid://beud3ach2qpqh" path="res://assets/textures/KenneyPrototypeTextures/Dark/texture_13.png" id="1_w1mpl"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_2ikht"]
 [ext_resource type="Texture2D" uid="uid://b7jy43qdle6bd" path="res://assets/textures/KenneyPrototypeTextures/Green/texture_01.png" id="2_27nyu"]
 [ext_resource type="Texture2D" uid="uid://bcls5dxcpi53d" path="res://assets/textures/KenneyPrototypeTextures/Purple/texture_01.png" id="3_b8nga"]
 [ext_resource type="Texture2D" uid="uid://cb8mq3ryp26wq" path="res://assets/textures/KenneyPrototypeTextures/Red/texture_01.png" id="3_ee2uc"]
+[ext_resource type="Texture2D" uid="uid://202q2yjresig" path="res://assets/textures/KenneyPrototypeTextures/Orange/texture_01.png" id="5_ix0bm"]
 [ext_resource type="PackedScene" uid="uid://brbqvbjlql87" path="res://scenes/player.tscn" id="6_ck2ga"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_miw8f"]
@@ -40,6 +41,44 @@ uv1_triplanar = true
 albedo_texture = ExtResource("3_b8nga")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rklge"]
+albedo_texture = ExtResource("3_b8nga")
+uv1_triplanar = true
+
+[sub_resource type="TextMesh" id="TextMesh_mk8og"]
+text = "15°"
+font_size = 36
+depth = 0.01
+
+[sub_resource type="TextMesh" id="TextMesh_ntv3g"]
+text = "30°"
+font_size = 36
+depth = 0.01
+
+[sub_resource type="TextMesh" id="TextMesh_vtgtq"]
+text = "45°"
+font_size = 36
+depth = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1gca"]
+albedo_texture = ExtResource("5_ix0bm")
+uv1_triplanar = true
+
+[sub_resource type="TextMesh" id="TextMesh_f1cv0"]
+text = "2m"
+font_size = 36
+depth = 0.01
+
+[sub_resource type="TextMesh" id="TextMesh_ivlhy"]
+text = "1.8m"
+font_size = 36
+depth = 0.01
+
+[sub_resource type="TextMesh" id="TextMesh_i8u4x"]
+text = "1.9m"
+font_size = 36
+depth = 0.01
+
 [node name="MapTest" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -49,30 +88,160 @@ environment = SubResource("Environment_gwxjs")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Props" type="Node3D" parent="."]
+[node name="CSG" type="Node3D" parent="."]
 
-[node name="Floor" type="CSGBox3D" parent="Props"]
+[node name="Floor" type="CSGBox3D" parent="CSG"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 material_override = SubResource("StandardMaterial3D_io1s5")
 use_collision = true
 size = Vector3(100, 0.1, 100)
 
-[node name="Box1" type="CSGBox3D" parent="Props"]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -3, 0.5, -2.2)
+[node name="Box1" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.5, 3)
 material_override = SubResource("StandardMaterial3D_j0bvb")
 use_collision = true
 
-[node name="Box2" type="CSGBox3D" parent="Props"]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 4.66475, 1, 0.412402)
+[node name="Box2" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 4, 1, 0)
 material_override = SubResource("StandardMaterial3D_8m8qd")
 use_collision = true
 size = Vector3(1, 2, 1)
 
-[node name="Box3" type="CSGBox3D" parent="Props"]
-transform = Transform3D(0.966788, 0, -0.255581, 0, 1, 0, 0.255581, 0, 0.966788, 2.44685, 1, -4.5559)
+[node name="Box3" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 2)
 material_override = SubResource("StandardMaterial3D_ukkqn")
 use_collision = true
 size = Vector3(2, 2, 2)
+
+[node name="Ramp15" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, 0.5)
+material_override = SubResource("StandardMaterial3D_rklge")
+use_collision = true
+size = Vector3(3, 1, 3)
+
+[node name="Box5" type="CSGBox3D" parent="CSG/Ramp15"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0.349037, 0.844185, 0)
+material_override = SubResource("StandardMaterial3D_rklge")
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 3)
+
+[node name="Text" type="MeshInstance3D" parent="CSG/Ramp15"]
+transform = Transform3D(-4.37114e-08, -0.965926, 0.258819, 0, 0.258819, 0.965926, -1, 4.2222e-08, -1.13133e-08, 0.948538, -0.323713, -4.05306e-08)
+mesh = SubResource("TextMesh_mk8og")
+
+[node name="Ramp30" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 4.5)
+material_override = SubResource("StandardMaterial3D_rklge")
+use_collision = true
+size = Vector3(3, 2, 3)
+
+[node name="Box5" type="CSGBox3D" parent="CSG/Ramp30"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0.335848, 0.821341, 0)
+material_override = SubResource("StandardMaterial3D_rklge")
+operation = 2
+use_collision = true
+size = Vector3(4, 2, 3)
+
+[node name="Text" type="MeshInstance3D" parent="CSG/Ramp30"]
+transform = Transform3D(-4.37114e-08, -0.866025, 0.5, 0, 0.5, 0.866025, -1, 3.78552e-08, -2.18557e-08, 0.827172, -0.602073, -3.52255e-08)
+mesh = SubResource("TextMesh_ntv3g")
+
+[node name="Ramp45" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, 8.5)
+material_override = SubResource("StandardMaterial3D_rklge")
+use_collision = true
+size = Vector3(3, 3, 3)
+
+[node name="Box5" type="CSGBox3D" parent="CSG/Ramp45"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.811537, 1.33178, 0)
+material_override = SubResource("StandardMaterial3D_rklge")
+operation = 2
+use_collision = true
+size = Vector3(5, 3, 3)
+
+[node name="Text" type="MeshInstance3D" parent="CSG/Ramp45"]
+transform = Transform3D(-4.37114e-08, -0.707107, 0.707107, 0, 0.707107, 0.707107, -1, 3.09086e-08, -3.09086e-08, 0.852924, -0.812163, -3.63512e-08)
+mesh = SubResource("TextMesh_vtgtq")
+
+[node name="Balls" type="Node3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSG/Balls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.286393, 0)
+use_collision = true
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_q1gca")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="CSG/Balls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.299437, 0)
+use_collision = true
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_q1gca")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CSG/Balls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.126133, -1)
+use_collision = true
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_q1gca")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CSG/Balls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.423132, -1)
+use_collision = true
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_q1gca")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="CSG/Balls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.339452, 1)
+use_collision = true
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_q1gca")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="CSG/Balls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.0200012, 1)
+use_collision = true
+radial_segments = 24
+rings = 12
+material = SubResource("StandardMaterial3D_q1gca")
+
+[node name="Wall" type="CSGBox3D" parent="CSG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
+material_override = SubResource("StandardMaterial3D_ukkqn")
+use_collision = true
+size = Vector3(4, 2, 0.5)
+
+[node name="Text" type="MeshInstance3D" parent="CSG/Wall"]
+transform = Transform3D(1, 1.36791e-15, 3.55271e-15, -4.92062e-15, 1, -2.66248e-15, 0, 3.55271e-15, 1, 1.67637, 0.676287, 0.271693)
+mesh = SubResource("TextMesh_f1cv0")
+
+[node name="Door18" type="CSGBox3D" parent="CSG/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.1, 0)
+material_override = SubResource("StandardMaterial3D_ukkqn")
+operation = 2
+use_collision = true
+size = Vector3(1, 1.8, 1)
+
+[node name="Text" type="MeshInstance3D" parent="CSG/Wall/Door18"]
+transform = Transform3D(1, -3.55271e-15, 8.47334e-15, -4.92062e-15, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.9, -0.05)
+mesh = SubResource("TextMesh_ivlhy")
+skeleton = NodePath("../..")
+
+[node name="Door19" type="CSGBox3D" parent="CSG/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.05, 0)
+material_override = SubResource("StandardMaterial3D_ukkqn")
+operation = 2
+use_collision = true
+size = Vector3(1, 1.9, 1)
+
+[node name="Text" type="MeshInstance3D" parent="CSG/Wall/Door19"]
+transform = Transform3D(1, -3.55271e-15, 8.47334e-15, -4.92062e-15, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.9, -0.05)
+mesh = SubResource("TextMesh_i8u4x")
+skeleton = NodePath("../..")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
