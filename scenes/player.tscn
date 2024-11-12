@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://brbqvbjlql87"]
+[gd_scene load_steps=18 format=3 uid="uid://brbqvbjlql87"]
 
 [ext_resource type="Script" path="res://scripts/statemachines/player/player_state_machine.gd" id="1_35pki"]
 [ext_resource type="PackedScene" uid="uid://dkn5furxbwf5p" path="res://scenes/modules/c_movement.tscn" id="1_du72k"]
 [ext_resource type="Script" path="res://scripts/statemachines/player/player_state_idle.gd" id="2_cdsie"]
 [ext_resource type="PackedScene" uid="uid://cg1lv56qte00m" path="res://scenes/modules/c_animation.tscn" id="3_mccyj"]
+[ext_resource type="Script" path="res://scripts/statemachines/player/player_state_move.gd" id="3_orhhe"]
 [ext_resource type="PackedScene" uid="uid://ccfjaphlxhaqa" path="res://scenes/modules/c_controller.tscn" id="3_ws3sy"]
 [ext_resource type="PackedScene" uid="uid://bffl18ki6uy0v" path="res://scenes/characters/pickles.tscn" id="4_wshfu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bw5h2a2v6utfe" path="res://resources/animation/player_statemachine.tres" id="5_7fcg8"]
@@ -54,10 +55,12 @@ far = 4000.0
 
 [node name="Player" type="Node3D"]
 
-[node name="PlayerStateMachine" type="LimboHSM" parent="." node_paths=PackedStringArray("c_animation", "first_state")]
+[node name="PlayerStateMachine" type="LimboHSM" parent="." node_paths=PackedStringArray("c_animation", "cb_character", "idle_state", "move_state")]
 script = ExtResource("1_35pki")
 c_animation = NodePath("../Modules/CAnimation")
-first_state = NodePath("PlayerStateIdle")
+cb_character = NodePath("../Character")
+idle_state = NodePath("PlayerStateIdle")
+move_state = NodePath("PlayerStateMove")
 
 [node name="PlayerStateIdle" type="LimboState" parent="PlayerStateMachine" node_paths=PackedStringArray("_tm_taunt")]
 script = ExtResource("2_cdsie")
@@ -65,6 +68,9 @@ _tm_taunt = NodePath("TimerTaunt")
 
 [node name="TimerTaunt" type="Timer" parent="PlayerStateMachine/PlayerStateIdle"]
 wait_time = 10.0
+
+[node name="PlayerStateMove" type="LimboState" parent="PlayerStateMachine"]
+script = ExtResource("3_orhhe")
 
 [node name="Modules" type="Node" parent="."]
 

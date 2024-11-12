@@ -8,7 +8,8 @@ signal animation_finished(anim_name: String)
 
 
 enum AnimState {
-	IDLE
+	IDLE,
+	MOVE
 }
 
 

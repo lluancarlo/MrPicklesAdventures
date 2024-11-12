@@ -33,7 +33,7 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4h2da"]
-graph_offset = Vector2(-706.387, -51.1926)
+graph_offset = Vector2(-605.806, -30.917)
 nodes/IdleRandom1/node = SubResource("AnimationNodeAnimation_s1y5m")
 nodes/IdleRandom1/position = Vector2(-500, 180)
 nodes/IdleRandom2/node = SubResource("AnimationNodeAnimation_xwb41")
@@ -57,4 +57,4 @@ advance_condition = &"on_idle"
 states/Idle/node = SubResource("AnimationNodeBlendTree_4h2da")
 states/Idle/position = Vector2(379, 67)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_5jfju")]
-graph_offset = Vector2(-143, -57)
+graph_offset = Vector2(-167, -44)

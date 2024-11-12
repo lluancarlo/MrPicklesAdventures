@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector3(get_inputs().axis_move.x, 0, get_inputs().axis_move.y)\
 		.rotated(Vector3.UP, _camera.rotation.y)
 	
-	print(_character.velocity)
 	var speed = _get_speed() * delta
 	if direction:
 		_character.velocity.x = move_toward(_character.velocity.x, direction.x * _get_speed(), delta * _direction_acceleration)
