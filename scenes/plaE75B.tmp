@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dkn5furxbwf5p" path="res://scenes/modules/c_movement.tscn" id="1_du72k"]
 [ext_resource type="Script" path="res://scripts/statemachines/player/player_state_idle.gd" id="2_cdsie"]
 [ext_resource type="PackedScene" uid="uid://cg1lv56qte00m" path="res://scenes/modules/c_animation.tscn" id="3_mccyj"]
-[ext_resource type="PackedScene" uid="uid://ccfjaphlxhaqa" path="res://scenes/modules/c_controller.tscn" id="3_ws3sy"]
 [ext_resource type="PackedScene" uid="uid://bffl18ki6uy0v" path="res://scenes/characters/pickles.tscn" id="4_wshfu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bw5h2a2v6utfe" path="res://resources/animation/player_statemachine.tres" id="5_7fcg8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="5_og4pq"]
 [ext_resource type="Script" path="res://scripts/modules/c_follow_camera.gd" id="5_vw3qu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_ahdnj"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="7_ceyrl"]
+[ext_resource type="SphereMesh" uid="uid://vg0y2qjgyp0v" path="res://assets/props/debug_ball.tres" id="8_fp8p0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ws44m"]
 radius = 0.3
@@ -68,28 +68,19 @@ wait_time = 10.0
 
 [node name="Modules" type="Node" parent="."]
 
-[node name="CController" parent="Modules" instance=ExtResource("3_ws3sy")]
-debug_info = false
-mouse_sensitivity = 0.001
-
-[node name="CMovement" parent="Modules" node_paths=PackedStringArray("_character", "_armature", "_controller", "_debug_direction", "_debug_rotation") instance=ExtResource("1_du72k")]
-_character = NodePath("../../Character")
-_armature = NodePath("../../Character/Pickles/Armature")
-_controller = NodePath("../CController")
-_debug_direction = NodePath("../../Character/RayCast3DDirection")
-_debug_rotation = NodePath("../../Character/RayCast3DRotation")
-
-[node name="CameraControl" type="Node" parent="Modules" node_paths=PackedStringArray("_player_cam", "_aim_cam", "_controller")]
-script = ExtResource("5_vw3qu")
-_player_cam = NodePath("../../PlayerPhantomCamera3D")
-_aim_cam = NodePath("../../PlayerAimPhantomCamera3D")
-_controller = NodePath("../CController")
-
 [node name="CAnimation" parent="Modules" node_paths=PackedStringArray("_anim_tree") instance=ExtResource("3_mccyj")]
 _anim_tree = NodePath("../../Character/AnimationTree")
 
+[node name="CMovement" parent="Modules" node_paths=PackedStringArray("_character", "_armature") instance=ExtResource("1_du72k")]
+_character = NodePath("../../Character")
+_armature = NodePath("../../Character/Pickles/Armature")
+
+[node name="CameraControl" type="Node" parent="Modules" node_paths=PackedStringArray("_player_cam", "_aim_cam")]
+script = ExtResource("5_vw3qu")
+_player_cam = NodePath("../../PlayerPhantomCamera3D")
+_aim_cam = NodePath("../../PlayerAimPhantomCamera3D")
+
 [node name="Character" type="CharacterBody3D" parent="."]
-velocity = Vector3(0, -632.336, 0)
 floor_max_angle = 0.698132
 platform_on_leave = 2
 
@@ -155,17 +146,8 @@ bones/44/rotation = Quaternion(0, 0, 1, 0)
 bones/45/rotation = Quaternion(0, 1, 0, 0)
 bones/46/rotation = Quaternion(0, 0.707107, -0.707107, 0)
 
-[node name="RayCast3DDirection" type="RayCast3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-target_position = Vector3(0, 0, 0)
-collide_with_bodies = false
-debug_shape_custom_color = Color(1, 0, 0, 1)
-
-[node name="RayCast3DRotation" type="RayCast3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
-target_position = Vector3(0, 0, -1)
-collide_with_bodies = false
-debug_shape_custom_color = Color(0.109804, 0.901961, 0.211765, 1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Character"]
+mesh = ExtResource("8_fp8p0")
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.85505, 2.34923)

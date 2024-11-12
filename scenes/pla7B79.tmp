@@ -69,27 +69,21 @@ wait_time = 10.0
 [node name="Modules" type="Node" parent="."]
 
 [node name="CController" parent="Modules" instance=ExtResource("3_ws3sy")]
-debug_info = false
-mouse_sensitivity = 0.001
-
-[node name="CMovement" parent="Modules" node_paths=PackedStringArray("_character", "_armature", "_controller", "_debug_direction", "_debug_rotation") instance=ExtResource("1_du72k")]
-_character = NodePath("../../Character")
-_armature = NodePath("../../Character/Pickles/Armature")
-_controller = NodePath("../CController")
-_debug_direction = NodePath("../../Character/RayCast3DDirection")
-_debug_rotation = NodePath("../../Character/RayCast3DRotation")
-
-[node name="CameraControl" type="Node" parent="Modules" node_paths=PackedStringArray("_player_cam", "_aim_cam", "_controller")]
-script = ExtResource("5_vw3qu")
-_player_cam = NodePath("../../PlayerPhantomCamera3D")
-_aim_cam = NodePath("../../PlayerAimPhantomCamera3D")
-_controller = NodePath("../CController")
 
 [node name="CAnimation" parent="Modules" node_paths=PackedStringArray("_anim_tree") instance=ExtResource("3_mccyj")]
 _anim_tree = NodePath("../../Character/AnimationTree")
 
+[node name="CMovement" parent="Modules" node_paths=PackedStringArray("_character", "_armature", "_debug_direction") instance=ExtResource("1_du72k")]
+_character = NodePath("../../Character")
+_armature = NodePath("../../Character/Pickles/Armature")
+_debug_direction = NodePath("../../Character/RayCast3D")
+
+[node name="CameraControl" type="Node" parent="Modules" node_paths=PackedStringArray("_player_cam", "_aim_cam")]
+script = ExtResource("5_vw3qu")
+_player_cam = NodePath("../../PlayerPhantomCamera3D")
+_aim_cam = NodePath("../../PlayerAimPhantomCamera3D")
+
 [node name="Character" type="CharacterBody3D" parent="."]
-velocity = Vector3(0, -632.336, 0)
 floor_max_angle = 0.698132
 platform_on_leave = 2
 
@@ -155,17 +149,11 @@ bones/44/rotation = Quaternion(0, 0, 1, 0)
 bones/45/rotation = Quaternion(0, 1, 0, 0)
 bones/46/rotation = Quaternion(0, 0.707107, -0.707107, 0)
 
-[node name="RayCast3DDirection" type="RayCast3D" parent="Character"]
+[node name="RayCast3D" type="RayCast3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 target_position = Vector3(0, 0, 0)
 collide_with_bodies = false
 debug_shape_custom_color = Color(1, 0, 0, 1)
-
-[node name="RayCast3DRotation" type="RayCast3D" parent="Character"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
-target_position = Vector3(0, 0, -1)
-collide_with_bodies = false
-debug_shape_custom_color = Color(0.109804, 0.901961, 0.211765, 1)
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.85505, 2.34923)
