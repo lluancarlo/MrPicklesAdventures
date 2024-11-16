@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgxkjbh2jj56e"]
+
+[ext_resource type="PackedScene" uid="uid://wtm31xcy6wi2" path="res://scenes/map_test.tscn" id="1_tr7iw"]
+[ext_resource type="PackedScene" uid="uid://hopouthpb276" path="res://scenes/ui/debug_overlay.tscn" id="2_iv20t"]
+
+[node name="Game" type="Node"]
+
+[node name="MapTest" parent="." instance=ExtResource("1_tr7iw")]
+
+[node name="DebugOverlay" parent="." instance=ExtResource("2_iv20t")]

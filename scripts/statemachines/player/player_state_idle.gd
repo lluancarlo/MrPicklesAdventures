@@ -11,8 +11,6 @@ func _ready() -> void:
 
 
 func _enter() -> void:
-	print("Player State: IDLE")
-
 	_blackboard = blackboard.get_var(&"bb_values")
 	_blackboard.c_animation.set_state(CAnimation.AnimState.IDLE)
 

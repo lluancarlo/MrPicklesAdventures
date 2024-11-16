@@ -1,9 +1,6 @@
 extends Node
 class_name CMovement
 
-
-enum StateMovement { WALK, RUN }
-
 @export_category(&"Nodes")
 @export var _character : CharacterBody3D
 @export var _armature : Node3D
@@ -14,15 +11,16 @@ enum StateMovement { WALK, RUN }
 @export var _debug_rotation : RayCast3D
 
 @export_category(&"Speeds")
-@export var _walk_speed = 5.0
-@export var _run_speed = 10.0
+@export var _walk_min_speed = 1.5
+@export var _walk_max_speed = 3.0
+@export var _run_speed = 5.0
 @export var _jump_speed = 6.0
 @export var _mesh_rotation_speed = 5.0
 @export var _direction_acceleration = 10.0
 
 var _camera : Camera3D
 var gravity = ProjectSettings.get_setting(&"physics/3d/default_gravity")
-var movement_state := StateMovement.WALK
+var movement_state := GlobalEnums.MoveMode.WALK_MAX
 
 
 func _ready() -> void:
@@ -35,14 +33,18 @@ func _process(_delta: float) -> void:
 	_character.move_and_slide()
 
 
-var movement_decay := 5
 func _physics_process(delta: float) -> void:
 	if _character.is_on_floor():
 		# Handle jump
 		if get_inputs().action_jump:
 			_character.velocity.y = _jump_speed
 		# Handle run
-		movement_state = StateMovement.RUN if get_inputs().action_run else StateMovement.WALK
+		if get_inputs().action_walk:
+			movement_state = GlobalEnums.MoveMode.WALK_MIN
+		elif get_inputs().action_run:
+			movement_state = GlobalEnums.MoveMode.RUN
+		else:
+			movement_state = GlobalEnums.MoveMode.WALK_MAX
 	
 	else:
 		# Add the gravity.
@@ -52,14 +54,14 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector3(get_inputs().axis_move.x, 0, get_inputs().axis_move.y)\
 		.rotated(Vector3.UP, _camera.rotation.y)
 	
-	var speed = _get_speed() * delta
+	var speed = get_desired_speed() * delta
 	if direction:
-		_character.velocity.x = move_toward(_character.velocity.x, direction.x * _get_speed(), delta * _direction_acceleration)
-		_character.velocity.z = move_toward(_character.velocity.z, direction.z * _get_speed(), delta * _direction_acceleration)
+		_character.velocity.x = move_toward(_character.velocity.x, direction.x * get_desired_speed(), delta * _direction_acceleration)
+		_character.velocity.z = move_toward(_character.velocity.z, direction.z * get_desired_speed(), delta * _direction_acceleration)
 	else:
 		_character.velocity.x = move_toward(_character.velocity.x, 0, delta * _direction_acceleration)
 		_character.velocity.z = move_toward(_character.velocity.z, 0, delta * _direction_acceleration)
-		
+	
 	if get_inputs().axis_move != Vector2.ZERO:
 		_armature.rotation.y = lerp_angle(_armature.rotation.y, atan2(-_character.velocity.x, -_character.velocity.z), _mesh_rotation_speed * delta)
 	
@@ -73,11 +75,13 @@ func get_inputs() -> ControllerInputs:
 	return _controller.inputs
 
 
-func _get_speed() -> float:
+func get_desired_speed() -> float:
 	match movement_state:
-		StateMovement.WALK:
-			return 3#_walk_speed
-		StateMovement.RUN:
-			return 5#_run_speed
+		GlobalEnums.MoveMode.WALK_MIN:
+			return _walk_min_speed
+		GlobalEnums.MoveMode.WALK_MAX:
+			return _walk_max_speed
+		GlobalEnums.MoveMode.RUN:
+			return _run_speed
 		_:
 			return 0

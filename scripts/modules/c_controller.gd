@@ -33,10 +33,21 @@ func _physics_process(delta: float) -> void:
 	print_input(&"== Input Tick Values. Delta:", delta)
 	
 	if Input.get_connected_joypads().size() > 0:
-		process_axis_camera(Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down", default_axis_deadzone))
+		_process_joystic()
 	else:
-		process_axis_camera(Input.get_last_mouse_velocity() * mouse_sensitivity)
-		
+		_process_keyboard_and_mouse()
+
+
+func _process_keyboard_and_mouse() -> void:
+	process_axis_camera(Input.get_last_mouse_velocity() * mouse_sensitivity)
+	process_axis_move(Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down"))
+	process_action_jump(Input.is_action_pressed(&"action_jump"))
+	process_action_run(Input.is_action_pressed(&"action_run"))
+	process_action_walk(Input.is_action_pressed(&"action_walk"))
+
+
+func _process_joystic() -> void:
+	process_axis_camera(Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down", default_axis_deadzone))
 	process_axis_move(Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down", default_axis_deadzone))
 	process_action_jump(Input.is_action_pressed(&"action_jump"))
 	process_action_run(Input.is_action_pressed(&"action_run"))
@@ -71,3 +82,8 @@ func process_action_jump(isPressed: bool) -> void:
 func process_action_run(isPressed: bool) -> void:
 	inputs.action_run = isPressed
 	print_input(&"action_run", inputs.action_run)
+
+
+func process_action_walk(isPressed: bool) -> void:
+	inputs.action_walk = isPressed
+	print_input(&"action_walk", inputs.action_walk)

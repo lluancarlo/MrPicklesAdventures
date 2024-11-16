@@ -1,0 +1,171 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=24 format=3 uid="uid://bw5h2a2v6utfe"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eig2f"]
+animation = &"animlib-idle/standard-idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s1y5m"]
+animation = &"animlib-idle/idle-random-1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xwb41"]
+animation = &"animlib-idle/idle-random-2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ndg5y"]
+animation = &"animlib-idle/idle-random-3"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_j7nrc"]
+filter_enabled = true
+filters = ["%GeneralSkeleton:Chest", "%GeneralSkeleton:Head", "%GeneralSkeleton:LeftHand", "%GeneralSkeleton:LeftIndexDistal", "%GeneralSkeleton:LeftIndexIntermediate", "%GeneralSkeleton:LeftIndexProximal", "%GeneralSkeleton:LeftLowerArm", "%GeneralSkeleton:LeftMiddleDistal", "%GeneralSkeleton:LeftMiddleIntermediate", "%GeneralSkeleton:LeftMiddleProximal", "%GeneralSkeleton:LeftShoulder", "%GeneralSkeleton:LeftThumbDistal", "%GeneralSkeleton:LeftThumbMetacarpal", "%GeneralSkeleton:LeftThumbProximal", "%GeneralSkeleton:LeftUpperArm", "%GeneralSkeleton:Neck", "%GeneralSkeleton:RightHand", "%GeneralSkeleton:RightIndexDistal", "%GeneralSkeleton:RightIndexIntermediate", "%GeneralSkeleton:RightIndexProximal", "%GeneralSkeleton:RightLowerArm", "%GeneralSkeleton:RightMiddleDistal", "%GeneralSkeleton:RightMiddleIntermediate", "%GeneralSkeleton:RightMiddleProximal", "%GeneralSkeleton:RightShoulder", "%GeneralSkeleton:RightThumbDistal", "%GeneralSkeleton:RightThumbMetacarpal", "%GeneralSkeleton:RightThumbProximal", "%GeneralSkeleton:RightUpperArm", "%GeneralSkeleton:Spine", "%GeneralSkeleton:UpperChest"]
+fadein_time = 0.3
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_40a7u"]
+input_0/name = "1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "3"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4h2da"]
+graph_offset = Vector2(-639.628, -38.9838)
+nodes/idle-normal/node = SubResource("AnimationNodeAnimation_eig2f")
+nodes/idle-normal/position = Vector2(-320, 0)
+nodes/idle-random-1/node = SubResource("AnimationNodeAnimation_s1y5m")
+nodes/idle-random-1/position = Vector2(-500, 180)
+nodes/idle-random-2/node = SubResource("AnimationNodeAnimation_xwb41")
+nodes/idle-random-2/position = Vector2(-500, 320)
+nodes/idle-random-3/node = SubResource("AnimationNodeAnimation_ndg5y")
+nodes/idle-random-3/position = Vector2(-500, 460)
+nodes/output/position = Vector2(620, 100)
+nodes/random-taunt/node = SubResource("AnimationNodeOneShot_j7nrc")
+nodes/random-taunt/position = Vector2(60, 40)
+nodes/taunt/node = SubResource("AnimationNodeTransition_40a7u")
+nodes/taunt/position = Vector2(-160, 260)
+node_connections = [&"output", 0, &"random-taunt", &"random-taunt", 0, &"idle-normal", &"random-taunt", 1, &"taunt", &"taunt", 0, &"idle-random-1", &"taunt", 1, &"idle-random-2", &"taunt", 2, &"idle-random-3"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sr8ik"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vni4w"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_xdpob"]
+xfade_time = 0.25
+input_0/name = "walk"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "sprint"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7q5ou"]
+animation = &"animlib-move/run-drunk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_33ccc"]
+animation = &"animlib-move/run-injury"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_nd4yy"]
+xfade_time = 0.5
+input_0/name = "normal"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "injury"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "drunk"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wgcj3"]
+animation = &"animlib-move/run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uixv6"]
+animation = &"animlib-move/sprint"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_08ngn"]
+animation = &"animlib-move/walk-drunk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhmie"]
+animation = &"animlib-move/walk-injury"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_peptf"]
+xfade_time = 0.2
+input_0/name = "normal"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "injury"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "drunk"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_57ww7"]
+animation = &"animlib-move/walk-style-1"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_53wi3"]
+graph_offset = Vector2(-38.672, -42.7626)
+nodes/DO-NOT-CHANGE-1/node = SubResource("AnimationNodeTimeScale_sr8ik")
+nodes/DO-NOT-CHANGE-1/position = Vector2(840, 20)
+nodes/DO-NOT-CHANGE-2/node = SubResource("AnimationNodeTimeScale_vni4w")
+nodes/DO-NOT-CHANGE-2/position = Vector2(760, 220)
+nodes/move-mode/node = SubResource("AnimationNodeTransition_xdpob")
+nodes/move-mode/position = Vector2(1120, 60)
+nodes/output/position = Vector2(1280, 80)
+nodes/run-drunk/node = SubResource("AnimationNodeAnimation_7q5ou")
+nodes/run-drunk/position = Vector2(240, 440)
+nodes/run-injury/node = SubResource("AnimationNodeAnimation_33ccc")
+nodes/run-injury/position = Vector2(0, 320)
+nodes/run-mode/node = SubResource("AnimationNodeTransition_nd4yy")
+nodes/run-mode/position = Vector2(560, 280)
+nodes/run-normal/node = SubResource("AnimationNodeAnimation_wgcj3")
+nodes/run-normal/position = Vector2(280, 240)
+nodes/sprint/node = SubResource("AnimationNodeAnimation_uixv6")
+nodes/sprint/position = Vector2(740, 460)
+nodes/walk-drunk/node = SubResource("AnimationNodeAnimation_08ngn")
+nodes/walk-drunk/position = Vector2(260, 60)
+nodes/walk-injury/node = SubResource("AnimationNodeAnimation_hhmie")
+nodes/walk-injury/position = Vector2(0, -20)
+nodes/walk-mode/node = SubResource("AnimationNodeTransition_peptf")
+nodes/walk-mode/position = Vector2(600, -60)
+nodes/walk-style-1/node = SubResource("AnimationNodeAnimation_57ww7")
+nodes/walk-style-1/position = Vector2(260, -100)
+node_connections = [&"DO-NOT-CHANGE-1", 0, &"walk-mode", &"DO-NOT-CHANGE-2", 0, &"run-mode", &"move-mode", 0, &"DO-NOT-CHANGE-1", &"move-mode", 1, &"DO-NOT-CHANGE-2", &"move-mode", 2, &"sprint", &"output", 0, &"move-mode", &"run-mode", 0, &"run-normal", &"run-mode", 1, &"run-injury", &"run-mode", 2, &"run-drunk", &"walk-mode", 0, &"walk-style-1", &"walk-mode", 1, &"walk-injury", &"walk-mode", 2, &"walk-drunk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5jfju"]
+advance_mode = 2
+advance_condition = &"on_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ah8ry"]
+xfade_time = 0.2
+advance_mode = 2
+advance_condition = &"on_move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3c6xn"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"on_idle"
+
+[resource]
+states/idle/node = SubResource("AnimationNodeBlendTree_4h2da")
+states/idle/position = Vector2(379, 67)
+states/move/node = SubResource("AnimationNodeBlendTree_53wi3")
+states/move/position = Vector2(521, 116)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_5jfju"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_ah8ry"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_3c6xn")]
+graph_offset = Vector2(-167, -44)

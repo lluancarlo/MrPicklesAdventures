@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://hopouthpb276"]
+
+[ext_resource type="Script" path="res://scripts/ui/debug_overlay.gd" id="1_c2wkn"]
+
+[node name="DebugOverlay" type="Control" node_paths=PackedStringArray("debug_values_block")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c2wkn")
+debug_values_block = NodePath("DebugValues")
+
+[node name="DebugValues" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 420.0
+theme_override_constants/separation = 0
+
+[node name="UpdateFps" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="UpdateFps" to="." method="_on_update_fps_timeout"]
