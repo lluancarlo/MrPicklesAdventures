@@ -38,5 +38,5 @@ func _set_state_transitions() -> void:
 	add_transition(move_state, idle_state, StateTransitions.TO_IDLE)
 
 
-func _on_active_state_changed(current: LimboState, previous: LimboState) -> void:
+func _on_active_state_changed(current: LimboState, _previous: LimboState) -> void:
 	DebugManager.update_info("PlayerSM", current.name)

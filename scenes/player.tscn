@@ -396,17 +396,17 @@ parameters/idle/random-taunt/request = 0
 parameters/idle/taunt/current_state = "1"
 parameters/idle/taunt/transition_request = ""
 parameters/idle/taunt/current_index = 0
-parameters/move/DO-NOT-CHANGE-1/scale = 0.8
-parameters/move/DO-NOT-CHANGE-2/scale = 0.9
 parameters/move/move-mode/current_state = "walk"
 parameters/move/move-mode/transition_request = ""
 parameters/move/move-mode/current_index = 0
 parameters/move/run-mode/current_state = "normal"
 parameters/move/run-mode/transition_request = ""
 parameters/move/run-mode/current_index = 0
+parameters/move/run-scale/scale = 0.9
 parameters/move/walk-mode/current_state = "normal"
 parameters/move/walk-mode/transition_request = ""
 parameters/move/walk-mode/current_index = 0
+parameters/move/walk-scale/scale = 0.8
 
 [node name="Pickles" parent="Character" instance=ExtResource("4_wshfu")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

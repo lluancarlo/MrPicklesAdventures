@@ -12,7 +12,7 @@ class_name CController
 @export var mouse_sensitivity := 0.05
 
 @export_category(&"Joystick")
-@export var default_axis_deadzone := 0.3
+@export var default_axis_deadzone := 0.25
 
 var inputs := ControllerInputs.new()
 var is_focused := false
@@ -48,9 +48,11 @@ func _process_keyboard_and_mouse() -> void:
 
 func _process_joystic() -> void:
 	process_axis_camera(Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down", default_axis_deadzone))
-	process_axis_move(Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down", default_axis_deadzone))
+	var axis = Input.get_vector(&"move_left", &"move_right", &"move_up", &"move_down", default_axis_deadzone)
+	process_axis_move(axis)
 	process_action_jump(Input.is_action_pressed(&"action_jump"))
 	process_action_run(Input.is_action_pressed(&"action_run"))
+	process_action_walk(axis.length() < 0.7)
 
 
 func print_input(input: String, value):

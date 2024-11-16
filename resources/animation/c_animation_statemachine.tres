@@ -49,10 +49,6 @@ nodes/taunt/node = SubResource("AnimationNodeTransition_40a7u")
 nodes/taunt/position = Vector2(-160, 260)
 node_connections = [&"output", 0, &"random-taunt", &"random-taunt", 0, &"idle-normal", &"random-taunt", 1, &"taunt", &"taunt", 0, &"idle-random-1", &"taunt", 1, &"idle-random-2", &"taunt", 2, &"idle-random-3"]
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sr8ik"]
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vni4w"]
-
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_xdpob"]
 xfade_time = 0.25
 input_0/name = "walk"
@@ -92,6 +88,8 @@ input_2/reset = true
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wgcj3"]
 animation = &"animlib-move/run"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_vni4w"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uixv6"]
 animation = &"animlib-move/sprint"
 
@@ -116,15 +114,13 @@ input_2/auto_advance = false
 input_2/break_loop_at_end = false
 input_2/reset = true
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sr8ik"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_57ww7"]
 animation = &"animlib-move/walk-style-1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_53wi3"]
 graph_offset = Vector2(-38.672, -42.7626)
-nodes/DO-NOT-CHANGE-1/node = SubResource("AnimationNodeTimeScale_sr8ik")
-nodes/DO-NOT-CHANGE-1/position = Vector2(840, 20)
-nodes/DO-NOT-CHANGE-2/node = SubResource("AnimationNodeTimeScale_vni4w")
-nodes/DO-NOT-CHANGE-2/position = Vector2(760, 220)
 nodes/move-mode/node = SubResource("AnimationNodeTransition_xdpob")
 nodes/move-mode/position = Vector2(1120, 60)
 nodes/output/position = Vector2(1280, 80)
@@ -136,6 +132,8 @@ nodes/run-mode/node = SubResource("AnimationNodeTransition_nd4yy")
 nodes/run-mode/position = Vector2(560, 280)
 nodes/run-normal/node = SubResource("AnimationNodeAnimation_wgcj3")
 nodes/run-normal/position = Vector2(280, 240)
+nodes/run-scale/node = SubResource("AnimationNodeTimeScale_vni4w")
+nodes/run-scale/position = Vector2(760, 220)
 nodes/sprint/node = SubResource("AnimationNodeAnimation_uixv6")
 nodes/sprint/position = Vector2(740, 460)
 nodes/walk-drunk/node = SubResource("AnimationNodeAnimation_08ngn")
@@ -144,9 +142,11 @@ nodes/walk-injury/node = SubResource("AnimationNodeAnimation_hhmie")
 nodes/walk-injury/position = Vector2(0, -20)
 nodes/walk-mode/node = SubResource("AnimationNodeTransition_peptf")
 nodes/walk-mode/position = Vector2(600, -60)
+nodes/walk-scale/node = SubResource("AnimationNodeTimeScale_sr8ik")
+nodes/walk-scale/position = Vector2(840, 20)
 nodes/walk-style-1/node = SubResource("AnimationNodeAnimation_57ww7")
 nodes/walk-style-1/position = Vector2(260, -100)
-node_connections = [&"DO-NOT-CHANGE-1", 0, &"walk-mode", &"DO-NOT-CHANGE-2", 0, &"run-mode", &"move-mode", 0, &"DO-NOT-CHANGE-1", &"move-mode", 1, &"DO-NOT-CHANGE-2", &"move-mode", 2, &"sprint", &"output", 0, &"move-mode", &"run-mode", 0, &"run-normal", &"run-mode", 1, &"run-injury", &"run-mode", 2, &"run-drunk", &"walk-mode", 0, &"walk-style-1", &"walk-mode", 1, &"walk-injury", &"walk-mode", 2, &"walk-drunk"]
+node_connections = [&"move-mode", 0, &"walk-scale", &"move-mode", 1, &"run-scale", &"move-mode", 2, &"sprint", &"output", 0, &"move-mode", &"run-mode", 0, &"run-normal", &"run-mode", 1, &"run-injury", &"run-mode", 2, &"run-drunk", &"run-scale", 0, &"run-mode", &"walk-mode", 0, &"walk-style-1", &"walk-mode", 1, &"walk-injury", &"walk-mode", 2, &"walk-drunk", &"walk-scale", 0, &"walk-mode"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5jfju"]
 advance_mode = 2

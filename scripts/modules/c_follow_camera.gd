@@ -44,4 +44,4 @@ func _set_pcam_rotation(pcam: PhantomCamera3D) -> void:
 
 func get_axis_camera() -> Vector2:
 	return Vector2.ZERO
-	return _controller.inputs.axis_camera
+	#return _controller.inputs.axis_camera

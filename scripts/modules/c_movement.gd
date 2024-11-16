@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if _character.is_on_floor():
+	if _character.is_on_floor() and get_inputs().axis_move.length() > 0:
 		# Handle jump
 		if get_inputs().action_jump:
 			_character.velocity.y = _jump_speed
@@ -53,8 +53,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Vector3(get_inputs().axis_move.x, 0, get_inputs().axis_move.y)\
 		.rotated(Vector3.UP, _camera.rotation.y)
-	
-	var speed = get_desired_speed() * delta
+
 	if direction:
 		_character.velocity.x = move_toward(_character.velocity.x, direction.x * get_desired_speed(), delta * _direction_acceleration)
 		_character.velocity.z = move_toward(_character.velocity.z, direction.z * get_desired_speed(), delta * _direction_acceleration)
@@ -67,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_instance_valid(_debug_direction):
 		_debug_direction.target_position = direction
+		_debug_direction.debug_shape_custom_color = _get_raytraycing_direction_color()
 	if is_instance_valid(_debug_rotation):
 		_debug_rotation.rotation.y = _armature.rotation.y
 
@@ -83,5 +83,17 @@ func get_desired_speed() -> float:
 			return _walk_max_speed
 		GlobalEnums.MoveMode.RUN:
 			return _run_speed
+		_:
+			return 0
+
+
+func _get_raytraycing_direction_color() -> Color:
+	match movement_state:
+		GlobalEnums.MoveMode.WALK_MIN:
+			return Color.ORANGE
+		GlobalEnums.MoveMode.WALK_MAX:
+			return Color.ORANGE_RED
+		GlobalEnums.MoveMode.RUN:
+			return Color.RED
 		_:
 			return 0

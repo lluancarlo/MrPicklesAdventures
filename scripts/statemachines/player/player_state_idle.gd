@@ -17,7 +17,7 @@ func _enter() -> void:
 	_tm_taunt.start()
 
 
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 	if _blackboard.cb_character.velocity.x != 0 or _blackboard.cb_character.velocity.z != 0:
 		dispatch(StateTransitions.TO_MOVE)
 
