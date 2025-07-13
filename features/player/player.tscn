@@ -1,0 +1,170 @@
+[gd_scene load_steps=18 format=3 uid="uid://brbqvbjlql87"]
+
+[ext_resource type="Script" uid="uid://dki0414gdshg1" path="res://features/player/statemachine/player_state_machine.gd" id="1_72p1y"]
+[ext_resource type="Script" uid="uid://b3xujs464gax2" path="res://features/player/statemachine/player_state_idle.gd" id="2_4kvd7"]
+[ext_resource type="Script" uid="uid://7si4qqrhgnbd" path="res://features/player/statemachine/player_state_move.gd" id="3_m333p"]
+[ext_resource type="PackedScene" uid="uid://cg1lv56qte00m" path="res://features/player/controllers/animation_controller.tscn" id="4_1ncrl"]
+[ext_resource type="PackedScene" uid="uid://ccfjaphlxhaqa" path="res://features/player/controllers/input_controller.tscn" id="5_8m8b1"]
+[ext_resource type="PackedScene" uid="uid://dkn5furxbwf5p" path="res://features/player/controllers/movement_controller.tscn" id="6_mhvub"]
+[ext_resource type="PackedScene" uid="uid://3k04jbqlfr2i" path="res://features/player/controllers/camera_controller.tscn" id="7_x3ag6"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://bw5h2a2v6utfe" path="res://data/animation/animation_controller_statemachine.tres" id="8_jec2r"]
+[ext_resource type="PackedScene" uid="uid://bffl18ki6uy0v" path="res://assets/characters/meshes/pickles/pickles.tscn" id="9_5rlqq"]
+[ext_resource type="Script" uid="uid://pv8hgos74jnh" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="12_lna2h"]
+[ext_resource type="Script" uid="uid://d1mgwbbbpo5o8" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="13_ftx3j"]
+[ext_resource type="Script" uid="uid://bhd2n6736n1ce" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="14_bc4qc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ws44m"]
+radius = 0.3
+height = 1.75
+
+[sub_resource type="Resource" id="Resource_yi6q2"]
+script = ExtResource("13_ftx3j")
+duration = 0.1
+transition = 0
+ease = 2
+
+[sub_resource type="Resource" id="Resource_5syhy"]
+script = ExtResource("14_bc4qc")
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+projection = 0
+fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
+
+[sub_resource type="Resource" id="Resource_451is"]
+script = ExtResource("13_ftx3j")
+duration = 0.1
+transition = 0
+ease = 2
+
+[sub_resource type="Resource" id="Resource_v3yf1"]
+script = ExtResource("14_bc4qc")
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+projection = 0
+fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
+
+[node name="Player" type="Node3D"]
+
+[node name="PlayerStateMachine" type="LimboHSM" parent="." node_paths=PackedStringArray("animation_controller", "movement_controller", "player_characterbody", "idle_state", "move_state")]
+script = ExtResource("1_72p1y")
+animation_controller = NodePath("../Controllers/AnimationController")
+movement_controller = NodePath("../Controllers/MovementController")
+player_characterbody = NodePath("../Character")
+idle_state = NodePath("PlayerStateIdle")
+move_state = NodePath("PlayerStateMove")
+
+[node name="PlayerStateIdle" type="LimboState" parent="PlayerStateMachine" node_paths=PackedStringArray("_tm_taunt")]
+script = ExtResource("2_4kvd7")
+_tm_taunt = NodePath("TimerTaunt")
+
+[node name="TimerTaunt" type="Timer" parent="PlayerStateMachine/PlayerStateIdle"]
+wait_time = 10.0
+
+[node name="PlayerStateMove" type="LimboState" parent="PlayerStateMachine"]
+script = ExtResource("3_m333p")
+
+[node name="Controllers" type="Node" parent="."]
+
+[node name="AnimationController" parent="Controllers" node_paths=PackedStringArray("_anim_tree") instance=ExtResource("4_1ncrl")]
+_anim_tree = NodePath("../../Character/AnimationTree")
+
+[node name="InputController" parent="Controllers" instance=ExtResource("5_8m8b1")]
+debug_info = false
+mouse_sensitivity = 0.001
+
+[node name="MovementController" parent="Controllers" node_paths=PackedStringArray("_character", "_armature", "_input_controller", "_debug_direction", "_debug_rotation") instance=ExtResource("6_mhvub")]
+_character = NodePath("../../Character")
+_armature = NodePath("../../Character/Pickles/Armature")
+_input_controller = NodePath("../InputController")
+_debug_direction = NodePath("../../Character/RayCast3DDirection")
+_debug_rotation = NodePath("../../Character/RayCast3DRotation")
+
+[node name="CameraController" parent="Controllers" node_paths=PackedStringArray("_player_cam", "_aim_cam") instance=ExtResource("7_x3ag6")]
+_player_cam = NodePath("../../PlayerPhantomCamera3D")
+_aim_cam = NodePath("../../PlayerAimPhantomCamera3D")
+
+[node name="Character" type="CharacterBody3D" parent="."]
+velocity = Vector3(0, -632.336, 0)
+floor_max_angle = 0.698132
+platform_on_leave = 2
+
+[node name="PlayerCameraPivot" type="Node3D" parent="Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_ws44m")
+
+[node name="AnimationTree" type="AnimationTree" parent="Character"]
+tree_root = ExtResource("8_jec2r")
+parameters/conditions/on_idle = false
+parameters/conditions/on_move = true
+parameters/idle/random-taunt/active = false
+parameters/idle/random-taunt/internal_active = false
+parameters/idle/random-taunt/request = 0
+parameters/idle/taunt/current_state = "1"
+parameters/idle/taunt/transition_request = ""
+parameters/idle/taunt/current_index = 0
+parameters/move/move-mode/current_state = "walk"
+parameters/move/move-mode/transition_request = ""
+parameters/move/move-mode/current_index = 0
+parameters/move/run-mode/current_state = "normal"
+parameters/move/run-mode/transition_request = ""
+parameters/move/run-mode/current_index = 0
+parameters/move/run-scale/scale = 0.9
+parameters/move/walk-mode/current_state = "normal"
+parameters/move/walk-mode/transition_request = ""
+parameters/move/walk-mode/current_index = 0
+parameters/move/walk-scale/scale = 0.8
+
+[node name="RayCast3DDirection" type="RayCast3D" parent="Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(0, 0, 0)
+collide_with_bodies = false
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="RayCast3DRotation" type="RayCast3D" parent="Character"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+target_position = Vector3(0, 0, -1)
+collide_with_bodies = false
+debug_shape_custom_color = Color(0.109804, 0.901961, 0.211765, 1)
+
+[node name="Pickles" parent="Character" instance=ExtResource("9_5rlqq")]
+
+[node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.85505, 2.34923)
+script = ExtResource("12_lna2h")
+priority = 10
+follow_mode = 6
+follow_target = NodePath("../Character/PlayerCameraPivot")
+tween_resource = SubResource("Resource_yi6q2")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_5syhy")
+follow_damping = true
+follow_distance = 2.5
+spring_length = 2.5
+
+[node name="PlayerAimPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 2, 1)
+script = ExtResource("12_lna2h")
+follow_mode = 6
+follow_target = NodePath("../Character/PlayerCameraPivot")
+tween_resource = SubResource("Resource_451is")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_v3yf1")
+follow_offset = Vector3(0.3, 0, 0)
+
+[connection signal="active_state_changed" from="PlayerStateMachine" to="PlayerStateMachine" method="_on_active_state_changed"]
+[connection signal="timeout" from="PlayerStateMachine/PlayerStateIdle/TimerTaunt" to="PlayerStateMachine/PlayerStateIdle" method="_on_timer_taunt_timeout"]
+
+[editable path="Character/Pickles"]

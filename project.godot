@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-DebugManager="*res://scripts/globals/debug_manager.gd"
-GlobalEnums="*res://scripts/globals/global_enums.gd"
+DebugManager="*res://data/scripts/globals/debug_manager.gd"
+GlobalEnums="*res://data/scripts/globals/global_enums.gd"
 
 [display]
 
@@ -29,6 +29,15 @@ window/size/viewport_height=1080
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "green",
+"res://data/": "red",
+"res://features/": "blue"
+}
 
 [filesystem]
 
