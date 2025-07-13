@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cg1lv56qte00m"]
 
-[ext_resource type="Script" path="res://scripts/modules/c_animation.gd" id="1_tg2cu"]
+[ext_resource type="Script" uid="uid://ubmgkrc0ncll" path="res://scripts/modules/c_animation.gd" id="1_tg2cu"]
 
 [node name="CAnimation" type="Node"]
 script = ExtResource("1_tg2cu")

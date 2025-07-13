@@ -275,7 +275,7 @@ tracks/37/keys = PackedFloat32Array(0, 1, 0.000275805, 0.702414, -0.711768, -0.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w1h4x"]
 _data = {
-"t-pose": SubResource("Animation_d76lc")
+&"t-pose": SubResource("Animation_d76lc")
 }
 
 [node name="Pickles" instance=ExtResource("1_5nxg5")]

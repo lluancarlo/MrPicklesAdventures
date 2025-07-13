@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://hopouthpb276"]
 
-[ext_resource type="Script" path="res://scripts/ui/debug_overlay.gd" id="1_c2wkn"]
+[ext_resource type="Script" uid="uid://fnh1o6oy5xym" path="res://scripts/ui/debug_overlay.gd" id="1_c2wkn"]
 
 [node name="DebugOverlay" type="Control" node_paths=PackedStringArray("debug_values_block")]
 layout_mode = 3

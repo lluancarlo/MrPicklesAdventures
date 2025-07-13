@@ -1,17 +1,17 @@
 [gd_scene load_steps=22 format=3 uid="uid://brbqvbjlql87"]
 
-[ext_resource type="Script" path="res://scripts/statemachines/player/player_state_machine.gd" id="1_35pki"]
+[ext_resource type="Script" uid="uid://dki0414gdshg1" path="res://scripts/statemachines/player/player_state_machine.gd" id="1_35pki"]
 [ext_resource type="PackedScene" uid="uid://dkn5furxbwf5p" path="res://scenes/modules/c_movement.tscn" id="1_du72k"]
-[ext_resource type="Script" path="res://scripts/statemachines/player/player_state_idle.gd" id="2_cdsie"]
+[ext_resource type="Script" uid="uid://b3xujs464gax2" path="res://scripts/statemachines/player/player_state_idle.gd" id="2_cdsie"]
 [ext_resource type="PackedScene" uid="uid://cg1lv56qte00m" path="res://scenes/modules/c_animation.tscn" id="3_mccyj"]
-[ext_resource type="Script" path="res://scripts/statemachines/player/player_state_move.gd" id="3_orhhe"]
+[ext_resource type="Script" uid="uid://7si4qqrhgnbd" path="res://scripts/statemachines/player/player_state_move.gd" id="3_orhhe"]
 [ext_resource type="PackedScene" uid="uid://ccfjaphlxhaqa" path="res://scenes/modules/c_controller.tscn" id="3_ws3sy"]
 [ext_resource type="PackedScene" uid="uid://bffl18ki6uy0v" path="res://scenes/characters/pickles.tscn" id="4_wshfu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bw5h2a2v6utfe" path="res://resources/animation/c_animation_statemachine.tres" id="5_7fcg8"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="5_og4pq"]
-[ext_resource type="Script" path="res://scripts/modules/c_follow_camera.gd" id="5_vw3qu"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_ahdnj"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="7_ceyrl"]
+[ext_resource type="Script" uid="uid://pv8hgos74jnh" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="5_og4pq"]
+[ext_resource type="Script" uid="uid://i3koulg7byfe" path="res://scripts/modules/c_follow_camera.gd" id="5_vw3qu"]
+[ext_resource type="Script" uid="uid://d1mgwbbbpo5o8" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="6_ahdnj"]
+[ext_resource type="Script" uid="uid://bhd2n6736n1ce" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="7_ceyrl"]
 [ext_resource type="AnimationLibrary" uid="uid://bmlmmhgios2cm" path="res://assets/character/anims/animlib-idle.glb" id="10_gfh6l"]
 [ext_resource type="AnimationLibrary" uid="uid://blfqgtk3ofcb7" path="res://assets/character/anims/animlib-move.glb" id="11_o5j73"]
 
@@ -291,7 +291,7 @@ tracks/37/keys = PackedFloat32Array(0, 1, 0.000275805, 0.702414, -0.711768, -0.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w1h4x"]
 _data = {
-"t-pose": SubResource("Animation_d76lc")
+&"t-pose": SubResource("Animation_d76lc")
 }
 
 [sub_resource type="Resource" id="Resource_yi6q2"]
