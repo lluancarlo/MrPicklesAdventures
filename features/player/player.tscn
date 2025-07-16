@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dkn5furxbwf5p" path="res://features/player/controllers/movement_controller.tscn" id="6_mhvub"]
 [ext_resource type="PackedScene" uid="uid://3k04jbqlfr2i" path="res://features/player/controllers/camera_controller.tscn" id="7_x3ag6"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bw5h2a2v6utfe" path="res://data/animation/animation_controller_statemachine.tres" id="8_jec2r"]
-[ext_resource type="PackedScene" uid="uid://bffl18ki6uy0v" path="res://assets/characters/meshes/pickles/pickles.tscn" id="9_5rlqq"]
+[ext_resource type="PackedScene" uid="uid://bwcmjxg7atnbc" path="res://assets/characters/meshes/pickles/pickles.tscn" id="9_5rlqq"]
 [ext_resource type="Script" uid="uid://pv8hgos74jnh" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="12_lna2h"]
 [ext_resource type="Script" uid="uid://d1mgwbbbpo5o8" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="13_ftx3j"]
 [ext_resource type="Script" uid="uid://bhd2n6736n1ce" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="14_bc4qc"]
@@ -106,7 +106,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_ws44m")
 
 [node name="AnimationTree" type="AnimationTree" parent="Character"]
+root_node = NodePath("../Pickles")
 tree_root = ExtResource("8_jec2r")
+anim_player = NodePath("../Pickles/AnimationPlayer")
 parameters/conditions/on_idle = false
 parameters/conditions/on_move = true
 parameters/idle/random-taunt/active = false
@@ -135,11 +137,57 @@ debug_shape_custom_color = Color(1, 0, 0, 1)
 
 [node name="RayCast3DRotation" type="RayCast3D" parent="Character"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
-target_position = Vector3(0, 0, -1)
+target_position = Vector3(0, 0, 1)
 collide_with_bodies = false
 debug_shape_custom_color = Color(0.109804, 0.901961, 0.211765, 1)
 
 [node name="Pickles" parent="Character" instance=ExtResource("9_5rlqq")]
+
+[node name="GeneralSkeleton" parent="Character/Pickles/Armature" index="0"]
+bones/0/position = Vector3(0.000459681, 0.754619, -0.00509254)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/4/rotation = Quaternion(0, 0, 0, 1)
+bones/5/rotation = Quaternion(0, 0, 0, 1)
+bones/7/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/8/rotation = Quaternion(0, 1, 0, 0)
+bones/9/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/10/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/11/rotation = Quaternion(-0.214187, 0.673887, 0.214187, 0.673887)
+bones/12/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(0, 0, 0, 1)
+bones/13/scale = Vector3(1, 1, 1)
+bones/15/rotation = Quaternion(0, 0, 0, 1)
+bones/16/rotation = Quaternion(0, 0, 0, 1)
+bones/17/rotation = Quaternion(0, 0, 0, 1)
+bones/19/rotation = Quaternion(0, 0, 0, 1)
+bones/20/rotation = Quaternion(0, 0, 0, 1)
+bones/21/rotation = Quaternion(0, 0, 0, 1)
+bones/23/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+bones/24/rotation = Quaternion(0, 1, 0, 0)
+bones/25/rotation = Quaternion(0, 0.707107, 0, 0.707107)
+bones/26/rotation = Quaternion(0, -0.707107, 0, 0.707107)
+bones/27/rotation = Quaternion(-0.214187, -0.673887, -0.214187, 0.673887)
+bones/28/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
+bones/28/scale = Vector3(1, 1, 1)
+bones/29/rotation = Quaternion(0, 0, 0, 1)
+bones/31/rotation = Quaternion(0, 0, 0, 1)
+bones/32/rotation = Quaternion(0, 0, 0, 1)
+bones/33/rotation = Quaternion(0, 0, 0, 1)
+bones/35/rotation = Quaternion(0, 0, 0, 1)
+bones/36/rotation = Quaternion(0, 0, 0, 1)
+bones/37/rotation = Quaternion(0, 0, 0, 1)
+bones/39/rotation = Quaternion(0, 0, 1, 0)
+bones/40/rotation = Quaternion(0, 1, 0, 0)
+bones/41/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/42/rotation = Quaternion(0, 1, 0, 0)
+bones/44/rotation = Quaternion(0, 0, 1, 0)
+bones/45/rotation = Quaternion(0, 1, 0, 0)
+bones/46/rotation = Quaternion(0, 0.707107, -0.707107, 0)
+bones/47/rotation = Quaternion(0, 1, 0, 0)
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.85505, 2.34923)

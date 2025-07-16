@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d0vn6ydb7u64n"
+uid="uid://cdc2cswhbcb3q"
 path="res://.godot/imported/pickles.glb-6ec86eeba07344d10104852d3d6da6c8.scn"
 
 [deps]
@@ -32,6 +32,12 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
-gltf/naming_version=0
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"retarget/bone_map": Resource("res://data/animation/default_bone_map.tres")
+}
+}
+}
+gltf/naming_version=1
 gltf/embedded_image_handling=1

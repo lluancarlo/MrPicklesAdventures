@@ -1,6 +1,8 @@
 extends Node
 
-enum MoveMode { 
+enum MoveMode
+{ 
+	NONE,
 	WALK_MIN,
 	WALK_MAX, 
 	RUN 

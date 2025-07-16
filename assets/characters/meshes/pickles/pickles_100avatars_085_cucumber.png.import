@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q8q7g5lwfsgo"
-path.s3tc="res://.godot/imported/pickles_100avatars_085_cucumber.png-8ba82ae55da3dbcd1e66fd8394f79af1.s3tc.ctex"
+uid="uid://bfw6alcyh77t5"
+path.s3tc="res://.godot/imported/Pickles_100Avatars_085_Cucumber.png-9c60be89c1559a4b85027df129aeaf27.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/characters/meshes/pickles/pickles_100avatars_085_cucumber.png"
-dest_files=["res://.godot/imported/pickles_100avatars_085_cucumber.png-8ba82ae55da3dbcd1e66fd8394f79af1.s3tc.ctex"]
+source_file="res://assets/characters/meshes/pickles/Pickles_100Avatars_085_Cucumber.png"
+dest_files=["res://.godot/imported/Pickles_100Avatars_085_Cucumber.png-9c60be89c1559a4b85027df129aeaf27.s3tc.ctex"]
 
 [params]
 

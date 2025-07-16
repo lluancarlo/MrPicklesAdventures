@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://8r2wokocdv00"
+uid="uid://g4xjirigntle"
 path="res://.godot/imported/carrot.glb-d8a33673f713bed1740cb256da015fb0.scn"
 
 [deps]
@@ -32,6 +32,12 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
-gltf/naming_version=0
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"retarget/bone_map": Resource("res://data/animation/default_bone_map.tres")
+}
+}
+}
+gltf/naming_version=1
 gltf/embedded_image_handling=1

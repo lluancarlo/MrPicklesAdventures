@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	var direction = Vector3(get_inputs().axis_move.x, 0, get_inputs().axis_move.y)\
 		.rotated(Vector3.UP, _camera.rotation.y)
-
+	print(direction)
 	if direction:
 		_character.velocity.x = move_toward(_character.velocity.x, direction.x * get_desired_speed(), delta * _direction_acceleration)
 		_character.velocity.z = move_toward(_character.velocity.z, direction.z * get_desired_speed(), delta * _direction_acceleration)
@@ -62,7 +62,13 @@ func _physics_process(delta: float) -> void:
 		_character.velocity.z = move_toward(_character.velocity.z, 0, delta * _direction_acceleration)
 	
 	if get_inputs().axis_move != Vector2.ZERO:
-		_armature.rotation.y = lerp_angle(_armature.rotation.y, atan2(-_character.velocity.x, -_character.velocity.z), _mesh_rotation_speed * delta)
+		const DEG2RAD_180 = deg_to_rad(180)
+		_armature.rotation.y = lerp_angle(
+			_armature.rotation.y,
+			atan2(-_character.velocity.x, -_character.velocity.z) + DEG2RAD_180,
+			_mesh_rotation_speed * delta
+		)
+		#_armature.rotation.y = lerp_angle(_armature.rotation.y, atan2(-_character.velocity.x, -_character.velocity.z) + deg_to_rad(180), _mesh_rotation_speed * delta)
 	
 	if is_instance_valid(_debug_direction):
 		_debug_direction.target_position = direction

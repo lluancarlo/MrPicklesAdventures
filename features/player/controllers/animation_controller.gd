@@ -6,15 +6,15 @@ signal animation_finished(anim_name: String)
 @export_category(&"Nodes")
 @export var _anim_tree : AnimationTree
 
-var current_anim_state : AnimState
-var current_walk_mode : WalkMode
-var current_move_mode : GlobalEnums.MoveMode
+var current_anim_state : AnimState = AnimState.NONE
+var current_walk_mode : WalkMode = WalkMode.NONE
+var current_move_mode : GlobalEnums.MoveMode = GlobalEnums.MoveMode.NONE
 
 const MAX_WALK_SCALE := 0.8 # This is sync with the animation
 const MAX_RUN_SCALE := 0.9 # This is sync with the animation
 
-enum AnimState { IDLE, MOVE }
-enum WalkMode { NORMAL, INJURY, DRUNK }
+enum AnimState { NONE, IDLE, MOVE }
+enum WalkMode { NONE, NORMAL, INJURY, DRUNK }
 
 	
 func _ready() -> void:
